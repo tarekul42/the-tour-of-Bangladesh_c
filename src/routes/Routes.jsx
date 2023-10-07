@@ -7,12 +7,17 @@ import News from "../Pages/News/News";
 import Destination from "../Pages/Destination/Destination";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
+import Home from "../Pages/Home/Home";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <News/>,
+        element: <Home/>,
         children: [
+            {
+                path: '/',
+                element: <News/>
+            },
             {
                 path: 'destination',
                 element: <Destination/>
