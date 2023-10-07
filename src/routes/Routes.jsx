@@ -16,7 +16,8 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <News/>
+                element: <News/>,
+                loader: ({params}) => fetch('https://the-tour-of-bangladesh-s-tarekul42s-projects.vercel.app/places')
             },
             {
                 path: 'destination',
