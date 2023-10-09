@@ -6,7 +6,7 @@ import CommonNav from '../CommonNav/CommonNav';
 const Navigation2 = () => {
     return (
         <div>
-            <div className="navbar bg-base-100 justify-around">
+            <div className="navbar justify-around">
             <ResponsiveNav/>
             <div className="hidden lg:flex">
                 <CommonNav/>

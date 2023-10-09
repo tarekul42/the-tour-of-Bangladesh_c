@@ -19,9 +19,7 @@ const Slider = () => {
                 key={photo.id}
                 className="carousel-item"
                 >
-                    {/* <NavLink to={`/places/${photos.id}`}> */}
                         <SliderImages photo={photo} />
-                    {/* </NavLink> */}
                 </div> )
 
 

@@ -6,7 +6,7 @@ const OtherRegisterSystem = () => {
     return (
         <div className="flex flex-col w-full border-opacity-50 px-8">
             <div className="divider">OR</div>
-            <div className="h-10 border-gray-100 border rounded-3xl place-items-center mb-2 flex">
+            <div className="h-10 border-gray-100 border rounded-3xl place-items-center mb-2 flex cursor-pointer">
                 <div className='grow-0'>
                     <img className='w-9 h-9 p-1' src={fb} alt="" />
                 </div>
@@ -14,7 +14,7 @@ const OtherRegisterSystem = () => {
                     <p className='text-center'>Continue with Facebook</p>
                 </div>
             </div>
-            <div className="h-10 border-gray-100 border rounded-3xl place-items-center mb-2 flex">
+            <div className="h-10 border-gray-100 border rounded-3xl place-items-center mb-2 flex cursor-pointer">
                 <div className='flex-none'>
                     <img className='w-9 h-9 p-1' src={google} alt="" />
                 </div>

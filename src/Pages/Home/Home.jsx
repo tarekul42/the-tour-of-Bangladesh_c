@@ -4,10 +4,9 @@ import { Outlet } from 'react-router-dom';
 
 const Home = () => {
     return (
-        <div>
-            <Navigation1/>
+        <>
             <Outlet/>
-        </div>
+        </>
     );
 };
 
