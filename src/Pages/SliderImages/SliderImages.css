@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+img{
+    height: 416px;
+    width: 270px;
+}
+.nameOfImages{
+    position: absolute;
+    left: 3%;
+    bottom: 6%;
+    color: #FFF;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
