@@ -6,7 +6,7 @@ const Slider = () => {
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/places')
+        fetch('https://the-tour-of-bangladesh-s.vercel.app/places')
             .then(res => res.json())
             .then(data => setPhotos(data))
             .catch(error => console.log(error))

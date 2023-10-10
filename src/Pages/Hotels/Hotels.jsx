@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigation2 from '../../Shared/Navigation2/Navigation2';
-import SpotLocation from '../SpotLocation/SpotLocation';
+// import SpotLocation from '../SpotLocation/SpotLocation';
 
 const Hotels = () => {
     return (
@@ -30,7 +30,7 @@ const Hotels = () => {
                         </div>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-xl">
-                        <SpotLocation />
+                        {/* <SpotLocation /> */}
                     </div>
                 </div>
             </div>

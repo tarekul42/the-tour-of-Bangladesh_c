@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <Place />,
-                loader: ({ params }) => fetch(`http://localhost:5000/places/${params.id}`)
+                loader: ({ params }) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`)
             }
         ]
     },
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <PlaceDescription/>,
-                loader: ({params}) => fetch(`http://localhost:5000/places/${params.id}`)
+                loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`)
             },
         ]
     },
