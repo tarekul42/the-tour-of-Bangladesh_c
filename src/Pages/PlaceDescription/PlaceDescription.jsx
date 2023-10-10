@@ -49,7 +49,7 @@ const PlaceDescription = () => {
                                 {/* <Link>
                                     <button className="">Start Booking</button>
                                 </Link> */}
-                                <Link className='btn bg-amber-400 text-base border-0' hotels={hotels} to='/hotels'>
+                                <Link className='btn bg-amber-400 text-base border-0' to={`/hotels/${id}`}>
                                     <button className='text-black'>Start Booking</button>
                                 </Link>
                             </div>

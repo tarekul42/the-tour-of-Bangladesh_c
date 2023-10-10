@@ -4,8 +4,6 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Testing from "../texting/Testing";
 import Destination from "../Pages/Destination/Destination";
-// import Blog from "../Pages/Blog/Blog";
-// import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home";
 import Place from "../Pages/News/Place";
 import PlaceDescription from "../Pages/PlaceDescription/PlaceDescription";
@@ -43,7 +41,7 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <Place />,
-                loader: ({ params }) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`)
+                loader: ({ params }) => fetch(`https://the-tour-of-bangladesh-s-tarekul42s-projects.vercel.app/places/${params.id}`)
             }
         ]
     },
@@ -54,16 +52,21 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <PlaceDescription/>,
-                loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`),
-                children:[
-                    {
-                        path: 'hotels',
-                        element: <PrivetRoute><Hotels/></PrivetRoute>
-                    }
-                ]
+                loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s-tarekul42s-projects.vercel.app/places/${params.id}`),
             }
         ]
     },
+    {
+        path: 'hotels',
+        element: <HotelsLayout/>,
+        children: [
+            {
+                path: ':id',
+                element: <PrivetRoute><Hotels/></PrivetRoute>,
+                loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s-tarekul42s-projects.vercel.app/places/${params.id}`)
+            }
+        ]
+    }
 ]);
 
 export default router
@@ -75,7 +78,7 @@ export default router
 //         {
 //             path: ':id',
 //             element: <PrivetRoute><Hotels></Hotels></PrivetRoute>,
-//             loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`)
+//             loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s-tarekul42s-projects.vercel.app/places/${params.id}`)
 //         }
 //     ]
 // }

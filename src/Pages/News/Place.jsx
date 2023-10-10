@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from '../Slider/Slider';
-import { Link, useLoaderData, useParams } from 'react-router-dom';
+import { Link, useLoaderData, } from 'react-router-dom';
 import './Place.css'
 import Navigation1 from '../../Shared/Navigation1/Navigation1';
 
