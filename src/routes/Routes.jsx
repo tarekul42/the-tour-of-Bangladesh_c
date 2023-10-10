@@ -11,6 +11,7 @@ import Place from "../Pages/News/Place";
 import PlaceDescription from "../Pages/PlaceDescription/PlaceDescription";
 import Hotels from "../Pages/Hotels/Hotels";
 import PrivetRoute from "./PrivetRoute";
+import HotelsLayout from "../layouts/HotelsLayout/HotelsLayout";
 
 const router = createBrowserRouter([
     {
@@ -53,33 +54,48 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <PlaceDescription/>,
-                loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`)
-            },
+                loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`),
+                children:[
+                    {
+                        path: 'hotels',
+                        element: <PrivetRoute><Hotels/></PrivetRoute>
+                    }
+                ]
+            }
         ]
     },
-    {
-        path: 'hotels',
-        element: <PrivetRoute><Hotels/></PrivetRoute>
-    }
-    // {
-    //     path: '/',
-    //     element: <Home />,
-    //     children: [
-    //         {
-    //             path: 'places',
-    //             element: <Place />,
-    //             loader: ({ params }) => fetch('http://localhost:5000/places')
-    //         },
-    //         {
-    //             path: 'blog',
-    //             element: <Blog />
-    //         },
-    //         {
-    //             path: 'contact',
-    //             element: <Contact />
-    //         }
-    //     ]
-    // },
 ]);
 
 export default router
+
+// {
+//     path: 'hotels',
+//     element: <HotelsLayout/>,
+//     children: [
+//         {
+//             path: ':id',
+//             element: <PrivetRoute><Hotels></Hotels></PrivetRoute>,
+//             loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s.vercel.app/places/${params.id}`)
+//         }
+//     ]
+// }
+
+// {
+//     path: '/',
+//     element: <Home />,
+//     children: [
+//         {
+//             path: 'places',
+//             element: <Place />,
+//             loader: ({ params }) => fetch('http://localhost:5000/places')
+//         },
+//         {
+//             path: 'blog',
+//             element: <Blog />
+//         },
+//         {
+//             path: 'contact',
+//             element: <Contact />
+//         }
+//     ]
+// },

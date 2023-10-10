@@ -4,7 +4,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const PlaceDescription = () => {
     const placesNews = useLoaderData();
-    const { name, description, destination, picture } = placesNews;
+    const {id, name, description, destination, picture, hotels } = placesNews;
     return (
         <div className='bg-cover' style={{ backgroundImage: `url(${picture})` }}>
             <Navigation1 />
@@ -30,7 +30,6 @@ const PlaceDescription = () => {
 
                             </div>
                             <div className="flex w-full gap-3">
-                                {/* <div className="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">content</div> */}
 
                                 <div className="form-control w-1/2">
                                     <label className="label">
@@ -50,7 +49,7 @@ const PlaceDescription = () => {
                                 {/* <Link>
                                     <button className="">Start Booking</button>
                                 </Link> */}
-                                <Link className='btn bg-amber-400 text-base border-0' to='/hotels'>
+                                <Link className='btn bg-amber-400 text-base border-0' hotels={hotels} to='/hotels'>
                                     <button className='text-black'>Start Booking</button>
                                 </Link>
                             </div>

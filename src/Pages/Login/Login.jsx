@@ -1,13 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import OtherRegisterSystem from '../../Shared/otherRegisterSystem/OtherRegisterSystem';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Login = () => {
+
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/places/1';
+
+    const handleSignInEmailPass = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        signIn(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     return (
         <div className="hero min-h-screen">
             <div className="hero-content flex-row lg:w-2/5 md:w-3/5 w-11/12">
                 <div className="card flex-shrink-0 w-full max-w-sm">
-                    <form className="card-body border border-gray-100 rounded">
+                    <form onSubmit={handleSignInEmailPass} className="card-body border border-gray-100 rounded">
                         <div className="mb-2">
                             <h1 className="text-3xl font-bold">Login</h1>
                         </div>
@@ -36,7 +61,7 @@ const Login = () => {
                             Don't have an Account? <Link to='/register' className='text-amber-300 underline'>Create an account</Link>
                         </p>
                     </form>
-                    <OtherRegisterSystem/>
+                    <OtherRegisterSystem />
                 </div>
             </div>
         </div>

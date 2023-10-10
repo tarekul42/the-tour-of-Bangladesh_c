@@ -3,6 +3,9 @@ import Navigation2 from '../../Shared/Navigation2/Navigation2';
 // import SpotLocation from '../SpotLocation/SpotLocation';
 
 const Hotels = () => {
+    const placesNews = useLoaderData();
+    const { name, description, destination, picture } = placesNews;
+    console.log(name);
     return (
         <>
             <Navigation2 />
