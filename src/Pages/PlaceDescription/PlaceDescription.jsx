@@ -1,39 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation1 from '../../Shared/Navigation1/Navigation1';
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const PlaceDescription = () => {
     const placesNews = useLoaderData();
-    const {id, name, description, destination, picture } = placesNews;
+    const { id, name, description, destination, picture } = placesNews;
+    
+    const [isFormComplete, setIsFormComplete] = useState(false);
 
-    const navigate = useNavigate();
-    console.log(navigate);
-    const location = useLocation();
-    console.log(location);
-    const from = location.state?.from?.pathname || `/hotels/${id}`;
-
-    const handleStartBooking = event =>{
+    const handleStartBooking = event => {
         event.preventDefault();
         const form = event.target;
-        const origin = form.origin.value;
-        const destination = form.destination.value;
-        const startDate = form.startDate.value;
-        const endDate = form.endDate.value;
-        console.log(origin, destination, startDate, endDate);
+        const inputOriginValue = form.origin.value;
+        const inputDestinationValue = form.destination.value;
+        const inputStartDateValue = form.startDate.value;
+        const inputEndDateValue = form.endDate.value;
 
-        return navigate(from, {replace: true });
-        
-        // signIn(email, password)
-        // .then(result =>{
-            //     const loggedUser = result.user;
-            //     console.log(loggedUser);
-            //     navigate(from, {replace: true })
-            // })
-            // .catch(error =>{
-                //     console.log(error);
-                // })
-                
-            }
+        if (inputOriginValue && inputDestinationValue && inputStartDateValue && inputEndDateValue) {
+            setIsFormComplete(true);
+        }
+    }
 
     return (
         <div className='bg-cover' style={{ backgroundImage: `url(${picture})` }}>
@@ -74,10 +60,12 @@ const PlaceDescription = () => {
                                     <input type="date" name="endDate" id="endDate" className="input input-ghost" required />
                                 </div>
                             </div>
-                            <div className="form-control mt-3">
-                                {/* <Link type='submit' className='btn bg-amber-400 text-base border-0' to={`/hotels/${id}`}> */}
+                            <div className="form-control mt-3 ">
+                                {isFormComplete ? (
+                                    <Link to={`/hotels/${id}`} className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</Link>
+                                ) : (
                                     <button type='submit' className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</button>
-                                {/* </Link> */}
+                                )}
                             </div>
                         </form>
                     </div>
