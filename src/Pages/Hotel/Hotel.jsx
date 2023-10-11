@@ -3,7 +3,7 @@ import './Hotel.css'
 
 const Hotel = ({ hotel }) => {
     const { name, image, facilities, room_design, flexibility, cost_per_night, ratings } = hotel;
-    const { bathrooms, bedrooms, guestrooms, kitchen } = room_design;
+    const { bathrooms, bedrooms, guests, kitchen } = room_design;
     const { total_ratings, average_rating } = ratings;
     return (
             // {/* hotel related info */}
@@ -13,7 +13,7 @@ const Hotel = ({ hotel }) => {
                     <h2 className='hotel-name'>{name}</h2>
                     <div className='w-full'>
                         <div className='flex justify-between my-2'>
-                            <p className='hotel-common-text'>{guestrooms} Guests</p>
+                            <p className='hotel-common-text'>{guests} Guests</p>
                             <p className='hotel-common-text'>{bedrooms} Bedrooms</p>
                             <p className='hotel-common-text'>{bathrooms} Bed</p>
                             <p className='hotel-common-text'>{kitchen ? "1 Kitchen" : "No Kitchen"}</p>
