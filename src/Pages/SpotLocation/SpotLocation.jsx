@@ -5,7 +5,6 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const SpotLocation = ({placesNews}) => {
     const { latitude, longitude } = placesNews;
-    console.log(latitude, longitude);
 
     const defaultProps = {
         center: {

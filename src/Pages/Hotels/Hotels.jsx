@@ -6,8 +6,7 @@ import SpotLocation from '../SpotLocation/SpotLocation';
 
 const Hotels = () => {
     const placesNews = useLoaderData();
-    const {id, name, hotels } = placesNews;
-    // console.log(hotels[0]);
+    const { name, hotels } = placesNews;
     return (
         <>
             <Navigation2 />

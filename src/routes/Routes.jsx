@@ -69,36 +69,4 @@ const router = createBrowserRouter([
     }
 ]);
 
-export default router
-
-// {
-//     path: 'hotels',
-//     element: <HotelsLayout/>,
-//     children: [
-//         {
-//             path: ':id',
-//             element: <PrivetRoute><Hotels></Hotels></PrivetRoute>,
-//             loader: ({params}) => fetch(`https://the-tour-of-bangladesh-s-tarekul42s-projects.vercel.app/places/${params.id}`)
-//         }
-//     ]
-// }
-
-// {
-//     path: '/',
-//     element: <Home />,
-//     children: [
-//         {
-//             path: 'places',
-//             element: <Place />,
-//             loader: ({ params }) => fetch('http://localhost:5000/places')
-//         },
-//         {
-//             path: 'blog',
-//             element: <Blog />
-//         },
-//         {
-//             path: 'contact',
-//             element: <Contact />
-//         }
-//     ]
-// },
+export default router;

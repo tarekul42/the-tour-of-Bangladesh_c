@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const ResponsiveNav = () => {
+    const { user } = useContext(AuthContext);
     return (
         <div className="">
             <div className="dropdown">
@@ -15,9 +18,14 @@ const ResponsiveNav = () => {
                     <li><Link to='/blog'>Blog</Link></li>
                     <li><Link to='/contact'>Contact</Link></li>
                     <li>
+                    {
+                    user?.displayName ?
+                        <h1 className='font-bold'>{user.displayName}</h1> :
+
                         <Link className='bg-amber-400' to='/login'>
                             <button className='text-white'>Login</button>
                         </Link>
+                }
                     </li>
                 </ul>
             </div>

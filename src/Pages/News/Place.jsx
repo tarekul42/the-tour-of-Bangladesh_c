@@ -3,14 +3,14 @@ import Slider from '../Slider/Slider';
 import { Link, useLoaderData, } from 'react-router-dom';
 import './Place.css'
 import Navigation1 from '../../Shared/Navigation1/Navigation1';
+import { FaArrowRight } from 'react-icons/fa';
 
 const Place = () => {
-    // const { id } = useParams();
     const placesNews = useLoaderData();
     const { id, name, description, picture } = placesNews;
     return (
-        <div className='bg-cover' style={{backgroundImage:`url(${picture})`}}>
-        <Navigation1/>
+        <div className='bg-cover' style={{ backgroundImage: `url(${picture})` }}>
+            <Navigation1 />
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col lg:flex-row">
                     <div className=' w-full lg:max-w-md'>
@@ -23,7 +23,11 @@ const Place = () => {
                         </p>
                         <Link className="rounded-lg bg-amber-400 text-black px-5 py-3" to={`/destination/${id}`} >
                             <button className='my-4' >
-                                Booking
+                                <span className='inline-flex items-center'>
+                            Booking
+                                <FaArrowRight className='mx-2 mt-1' />
+
+                            </span>
                             </button>
                         </Link>
                     </div>
