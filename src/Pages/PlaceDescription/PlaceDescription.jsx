@@ -111,12 +111,11 @@ const PlaceDescription = () => {
                                 </div>
                             </div>
                             <div className="form-control mt-3 ">
-                                {/* {isFormComplete ? (
+                                {isFormComplete ? (
                                     <Link to={`/hotels/${id}`} className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</Link>
                                 ) : (
                                     <button type='submit' className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</button>
-                                    )} */}
-                            <button type='submit' className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</button>
+                                    )}
                             </div>
                             {
                             error ?

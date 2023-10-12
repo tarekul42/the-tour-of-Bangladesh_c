@@ -1,10 +1,12 @@
 import React from 'react';
 import './Hotel.css'
+import { FaStar } from 'react-icons/fa';
 
 const Hotel = ({ hotel }) => {
     const { name, image, facilities, room_design, flexibility, cost_per_night, ratings } = hotel;
     const { bathrooms, bedrooms, guests, kitchen } = room_design;
     const { total_ratings, average_rating } = ratings;
+    
     return (
             // {/* hotel related info */}
             <div className='grid grid-rows-1 md:grid-cols-5 gap-1 lg:gap-4 items-center pb-6 px-2'>
@@ -26,9 +28,8 @@ const Hotel = ({ hotel }) => {
                         </div>
                         <p className='hotel-common-text my-2'>{flexibility}</p>
                     <div className='flex justify-between'>
-                        <p className='hotel-common-text'>{average_rating} ({total_ratings}) </p>
+                        <p className='hotel-common-text inline-flex items-center'> <FaStar className='me-2 text-amber-300' /> {average_rating} ({total_ratings}) </p>
                         <p className='hotel-common-text'>${cost_per_night}/night</p>
-                        <p>total cost</p>
                     </div>
                 </div>
         </div>
