@@ -110,8 +110,8 @@ const Register = () => {
                         </p>
                         {
                             error ?
-                            <p className='text-danger'>{error}</p> :
-                            <p className='text-info'>{success}</p>
+                            <p className='text-red-700'>{error}</p> :
+                            <p className='text-cyan-600'>{success}</p>
                         }
                     </form>
                     <OtherRegisterSystem />

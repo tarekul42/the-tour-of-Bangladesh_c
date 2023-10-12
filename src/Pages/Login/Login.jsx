@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import OtherRegisterSystem from '../../Shared/otherRegisterSystem/OtherRegisterSystem';
 import { AuthContext } from '../../Providers/AuthProviders';
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const emailRef = useRef();
+
+    const { signIn, forgetPassword } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/places/1';
@@ -22,10 +26,33 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 navigate(from, { replace: true })
+                event.target.reset();
+                setSuccess('Your login in successful');
+                setError('')
             })
             .catch(error => {
                 console.log(error);
+                setError('');
+                setSuccess('')
             })
+    }
+
+    // handle forget password
+    const handleResetPassword = event =>{
+        const email = emailRef.current.value;
+        console.log(email);
+        if(!email){
+            setError('Please Provide your email address to reset password')
+            return;
+        }
+        forgetPassword( email )
+        .then(() =>{
+            setSuccess('Please check your email')
+        })
+        .catch(error =>{
+            console.log(error);
+            setError(error.message)
+        })
     }
 
     return (
@@ -37,7 +64,7 @@ const Login = () => {
                             <h1 className="text-3xl font-bold">Login</h1>
                         </div>
                         <div className="form-control">
-                            <input type="email" placeholder="Email" name='email' className="input input-bordered" required />
+                            <input type="email" placeholder="Email" ref={emailRef} name='email' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <input type="password" placeholder="Password" name='password' className="input input-bordered" required />
@@ -50,7 +77,7 @@ const Login = () => {
                                 </div>
 
                                 <label className="label">
-                                    <a href="#" className="underline text-xs link link-hover text-amber-300">Forgot password?</a>
+                                    <a onClick={handleResetPassword} href="#" className="underline text-xs link link-hover text-amber-300">Forgot password?</a>
                                 </label>
                             </div>
                         </div>
@@ -60,6 +87,11 @@ const Login = () => {
                         <p className='text-xs text-center'>
                             Don't have an Account? <Link to='/register' className='text-amber-300 underline'>Create an account</Link>
                         </p>
+                        {
+                            error ?
+                            <p className='text-red-700'>{error}</p> :
+                            <p className='text-cyan-600'>{success}</p>
+                        }
                     </form>
                     <OtherRegisterSystem />
                 </div>

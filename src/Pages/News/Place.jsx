@@ -38,10 +38,10 @@ const Place = () => {
             </div>
             <div className='w-48 mx-auto'>
 
-                <div className=" join grid grid-cols-2">
+                {/* <div className=" join grid grid-cols-2">
                     <button className="join-item btn btn-outline">previous</button>
                     <button className="join-item btn btn-outline">Next</button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
