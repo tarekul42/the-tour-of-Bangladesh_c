@@ -1,12 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation1 from '../../Shared/Navigation1/Navigation1';
 import { Link, useLoaderData } from 'react-router-dom';
+import moment from 'moment/moment';
 
 const PlaceDescription = () => {
     const placesNews = useLoaderData();
     const { id, name, description, destination, picture } = placesNews;
-    
+
     const [isFormComplete, setIsFormComplete] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    // start date validation
+    const handleStartDateChanged = (e) => {
+        const startDate = e.target.value;
+        
+        // regex for YYYY-MM-DD
+        setError('')
+        if (!/^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(startDate)) {
+            setError('Please try with a valid date');
+            return;
+        } 
+        else {
+            setSuccess('Have a good tour');
+            setError('');
+        }
+    };
+
+
+    // end date validation
+    const handleEndDateChanged = (e) => {
+        const endDate = e.target.value;
+
+        // regex for YYYY-MM-DD
+        setError('')
+        if (!/^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(endDate)) {
+            setError('Please try with a valid date');
+            setIsFormComplete(false)
+            return;
+        } 
+        else {
+            setSuccess('Have a good tour');
+            setIsFormComplete(true);
+            setError('');
+        }
+    };
 
     const handleStartBooking = event => {
         event.preventDefault();
@@ -16,9 +54,21 @@ const PlaceDescription = () => {
         const inputStartDateValue = form.startDate.value;
         const inputEndDateValue = form.endDate.value;
 
-        if (inputOriginValue && inputDestinationValue && inputStartDateValue && inputEndDateValue) {
-            setIsFormComplete(true);
+        setError('');
+        if(inputStartDateValue > inputEndDateValue){
+            setIsFormComplete(false);
+            setError("Use valid date for your tour");
         }
+        else if (inputOriginValue && inputDestinationValue && inputStartDateValue && inputEndDateValue) {
+            setIsFormComplete(true);
+            setError('');
+        }
+        else{
+            setIsFormComplete(true);
+            setError('');
+        }
+        let result=moment(inputEndDateValue).diff(inputStartDateValue,'days')
+        console.log(result);
     }
 
     return (
@@ -51,22 +101,28 @@ const PlaceDescription = () => {
                                     <label className="label">
                                         <span className="label-text">From</span>
                                     </label>
-                                    <input type="date" name="startDate" id="startDate" className="input input-ghost" required />
+                                    <input type="date" name="startDate" onChange={handleStartDateChanged} id="startDate" className="input input-ghost" required />
                                 </div>
                                 <div className="form-control w-1/2">
                                     <label className="label">
                                         <span className="label-text">To</span>
                                     </label>
-                                    <input type="date" name="endDate" id="endDate" className="input input-ghost" required />
+                                    <input type="date" name="endDate" onChange={handleEndDateChanged} id="endDate" className="input input-ghost" required />
                                 </div>
                             </div>
                             <div className="form-control mt-3 ">
-                                {isFormComplete ? (
+                                {/* {isFormComplete ? (
                                     <Link to={`/hotels/${id}`} className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</Link>
                                 ) : (
                                     <button type='submit' className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</button>
-                                )}
+                                    )} */}
+                            <button type='submit' className='btn bg-amber-400 text-base border-0 text-black'>Start Booking</button>
                             </div>
+                            {
+                            error ?
+                            <p className='text-red-700'>{error}</p> :
+                            <p className='text-cyan-600'>{success}</p>
+                        }
                         </form>
                     </div>
                 </div>

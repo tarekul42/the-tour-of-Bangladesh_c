@@ -5,7 +5,6 @@ import { AuthContext } from '../Providers/AuthProviders';
 const PrivetRoute = ({children}) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
-    console.log(location);
 
     if(loading){
         return <span className="loading loading-spinner loading-lg text-error"></span>
