@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import OtherRegisterSystem from '../../Shared/otherRegisterSystem/OtherRegisterSystem';
 import { AuthContext } from '../../Providers/AuthProviders';
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/places/1';
 
     const handleRegisterWithEmailPass = event => {
         event.preventDefault();
@@ -21,6 +24,7 @@ const Register = () => {
             .then(result => {
                 const createdUser = result.user;
                 console.log(createdUser);
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.log(error);
