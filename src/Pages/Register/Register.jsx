@@ -1,14 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import OtherRegisterSystem from '../../Shared/otherRegisterSystem/OtherRegisterSystem';
 import { AuthContext } from '../../Providers/AuthProviders';
 
 const Register = () => {
 
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/places/1';
+
+    
+    const handlePassword = event =>{
+        const password = event.target.value;
+        // password validation
+        setError('')
+        if (password.length < 8) {
+            setError('Your Password should at least 8 character.');
+            return;
+        }
+        else if (!/(?=.*[a-zA-Z])/.test(password)) {
+            setError('Your Password should contain at least 1 alphabetic character.');
+            return;
+        }
+        else if (!/(?=.*[@^*!#\$%&\?].*)/.test(password)) {
+            setError('Your password should contain at least 1 special characters.');
+            return;
+        }
+        else if (!/(?=.*[1-9])/.test(password)) {
+            setError('Your password should contain at least 1 digit.');
+            return;
+        }
+        else {
+            setError('')
+        }
+    }
+
 
     const handleRegisterWithEmailPass = event => {
         event.preventDefault();
@@ -20,17 +50,34 @@ const Register = () => {
         const confirm = form.confirm.value;
         console.log(firstname, lastname, email, password, confirm);
 
+        // confirm password validation
+        if(password !== confirm){
+            setError("Your Password doesn't matched");
+            return;
+        }
+        else{
+            setError('')
+        }
+
+        // create a new user
         createUser(email, password)
             .then(result => {
-                const createdUser = result.user;
-                console.log(createdUser);
+                const loggedUser = result.user;
+                console.log(loggedUser);
                 navigate(from, { replace: true })
+                event.target.reset();
+                setSuccess('Your registration in successful');
+                setError('')
+
             })
             .catch(error => {
-                console.log(error);
+                setError(error.message);
+                setSuccess('')
             })
 
     }
+
+
 
     return (
         <div className="hero min-h-screen">
@@ -50,7 +97,7 @@ const Register = () => {
                             <input type="email" placeholder="Email" name='email' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
-                            <input type="password" name='password' placeholder="Password" className="input input-bordered" required />
+                            <input onChange={handlePassword} type="password" name='password' placeholder="Password" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <input type="password" placeholder="Confirm password" name='confirm' className="input input-bordered" required />
@@ -61,8 +108,13 @@ const Register = () => {
                         <p className='text-xs text-center'>
                             Already have an account? <Link to='/login' className='text-amber-300 underline'>Login</Link>
                         </p>
+                        {
+                            error ?
+                            <p className='text-danger'>{error}</p> :
+                            <p className='text-info'>{success}</p>
+                        }
                     </form>
-                    <OtherRegisterSystem/>
+                    <OtherRegisterSystem />
                 </div>
             </div>
         </div>
