@@ -3,7 +3,7 @@ import fb from '../../assets/images/icons/fb.png'
 import google from '../../assets/images/icons/google.png'
 import { AuthContext } from '../../Providers/AuthProviders';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const provider = new GoogleAuthProvider();
 
@@ -11,6 +11,7 @@ const OtherRegisterSystem = () => {
 
     const {signInGoogle} = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
     const from = location.state?.from?.pathname || '/places/1';
 
     const signInWithGooglePopup = () =>{
